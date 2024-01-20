@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihajouji <ihajouji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/02 11:19:58 by ihajouji          #+#    #+#             */
-/*   Updated: 2024/01/17 17:39:44 by ihajouji         ###   ########.fr       */
+/*   Created: 2024/01/16 10:51:06 by ihajouji          #+#    #+#             */
+/*   Updated: 2024/01/16 14:59:19 by ihajouji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <string.h>
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -54,7 +53,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	j = 0;
 	result_len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	result = malloc(result_len);
+	result = malloc((result_len));
 	if (!result)
 		return (NULL);
 	if (s1)

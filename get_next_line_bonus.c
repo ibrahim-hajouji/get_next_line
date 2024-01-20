@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihajouji <ihajouji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 20:32:19 by ihajouji          #+#    #+#             */
-/*   Updated: 2024/01/17 21:46:31 by ihajouji         ###   ########.fr       */
+/*   Created: 2024/01/16 10:50:52 by ihajouji          #+#    #+#             */
+/*   Updated: 2024/01/17 21:47:10 by ihajouji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_result(char *result, int fd)
 {
@@ -78,7 +78,6 @@ char	*get_remainder(char *result)
 		return (NULL);
 	i = 0;
 	j = 0;
-	stash = NULL;
 	while (result[i] != '\n' && result[i])
 		++i;
 	if (!result[i])
@@ -99,24 +98,24 @@ char	*get_remainder(char *result)
 
 char	*get_next_line(int fd)
 {
-	static char	*result;
+	static char	*result[1024];
 	char		*line;
 
 	if (fd < 0 || fd == 1 || fd == 2 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		result = ft_free(result);
+		result[fd] = ft_free(result[fd]);
 		return (NULL);
 	}
-	result = get_result(result, fd);
-	if (!result)
+	result[fd] = get_result(result[fd], fd);
+	if (!result[fd])
 		return (NULL);
-	line = ft_line(result);
+	line = ft_line(result[fd]);
 	if (!line || !*line)
 	{
 		line = ft_free(line);
-		result = ft_free(result);
+		result[fd] = ft_free(result[fd]);
 		return (NULL);
 	}
-	result = get_remainder(result);
+	result[fd] = get_remainder(result[fd]);
 	return (line);
 }
